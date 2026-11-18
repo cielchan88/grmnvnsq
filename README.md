@@ -1,17 +1,35 @@
-# Venu Sq HUD — watch face untuk Garmin Venu Sq 2
+# Crimson HUD — watch face futuristik merah-oranye untuk Garmin Venu Sq 2
 
-Watch face digital (Connect IQ / Monkey C) untuk layar AMOLED 320×360 Venu Sq 2 dan Venu Sq 2 Music.
+Watch face Connect IQ (Monkey C) untuk `venusq2` dan `venusq2m` (AMOLED 320×360). Semua elemen digambar
+secara prosedural dengan `Toybox.Graphics` — tanpa bitmap selain ikon launcher.
 
-## Tampilan (gaya HUD futuristik, label bahasa Inggris)
-- **Baris status**: ikon diamond koneksi ponsel + jumlah notifikasi (kiri), baterai 5 segmen + persen (kanan)
-- **Tanggal**: selalu bahasa Inggris, mis. `FRI  06 NOV`, diapit garis HUD
-- **Jam besar** di dalam bracket sudut: jam putih, menit cyan, bayangan offset; label `24H`/`AM`/`PM` dan detik
-- **Bar langkah 24 segmen** terhadap target harian (hijau neon bila tercapai)
-- **Panel statistik bersudut potong**: STEPS, BPM, KCAL
-- **Always-on (AOD)**: jam redup + bracket kecil yang bergeser tiap menit (perlindungan burn-in AMOLED)
+## Tata letak
+| Area | Y (px) | Isi |
+|---|---|---|
+| Bingkai | tepi 16 px | Bracket sudut bersudut potong (crimson) + grid horizontal tipis di belakang jam |
+| Header | 22–55 | Bluetooth + notifikasi · tanggal `WED 18 NOV` · baterai 5 segmen + persen |
+| Jam | 85–195 | Jam amber + garis bawah neon, menit oranye neon, halo crimson gelap, kotak detik |
+| Langkah | 205–255 | Bar equalizer 24 segmen, gradasi crimson → oranye, persentase target |
+| Telemetri | 265–335 | Detak jantung (BPM) · langkah · kalori, dipisah garis vertikal |
 
-## Build
-1. Install [Connect IQ SDK](https://developer.garmin.com/connect-iq/sdk/) dan device `venusq2` lewat SDK Manager.
+**Always-on / sleep**: hanya jam redup + bar baterai tipis 2 px, bergeser setiap menit pada grid 5×5
+(perlindungan burn-in AMOLED). Grid, bingkai, halo, dan detik disembunyikan.
+
+## Struktur
+```
+manifest.xml
+monkey.jungle
+resources/strings/strings.xml
+resources/drawables/drawables.xml
+resources/drawables/launcher_icon.svg
+source/FuturisticRedOrangeApp.mc     entry point (AppBase)
+source/FuturisticRedOrangeView.mc    WatchFace: layout, data sensor, sleep state
+source/HudRenderer.mc                palet warna + helper gambar (bracket, bar segmen, ikon)
+```
+
+## Build dengan Monkey C SDK
+1. Install [Connect IQ SDK Manager](https://developer.garmin.com/connect-iq/sdk/), unduh SDK terbaru dan
+   device **Venu Sq 2** / **Venu Sq 2 Music**.
 2. Buat developer key (sekali saja):
    ```bash
    openssl genrsa -out developer_key.pem 4096
@@ -19,9 +37,23 @@ Watch face digital (Connect IQ / Monkey C) untuk layar AMOLED 320×360 Venu Sq 2
    ```
 3. Compile:
    ```bash
-   monkeyc -f monkey.jungle -d venusq2 -o bin/VenuSqHud.prg -y developer_key.der
+   monkeyc -f monkey.jungle -d venusq2 -o bin/CrimsonHud.prg -y developer_key.der
    ```
-4. Jalankan di simulator: `connectiq` lalu `monkeydo bin/VenuSqHud.prg venusq2`.
-5. Pasang ke jam: sambungkan USB, salin `bin/VenuSqHud.prg` ke folder `GARMIN/APPS/`.
 
-Atau pakai VS Code + ekstensi Monkey C: *Monkey C: Build for Device*.
+## Menjalankan di simulator
+```bash
+connectiq &
+monkeydo bin/CrimsonHud.prg venusq2
+```
+Di simulator: **Settings → Low Power Mode** untuk menguji tampilan always-on, dan
+**Simulation → Activity Data** untuk mengisi langkah/detak jantung.
+
+VS Code: pasang ekstensi *Monkey C*, lalu *Monkey C: Build for Device* atau tekan F5.
+
+## Pasang ke jam
+Sambungkan jam via USB dan salin `bin/CrimsonHud.prg` ke folder `GARMIN/APPS/`.
+
+## Catatan
+- Kalori yang ditampilkan adalah **total kalori harian** (`ActivityMonitor.Info.calories`); Connect IQ tidak
+  menyediakan kalori aktif secara langsung.
+- Efek "glow" dibuat dari salinan teks berwarna gelap yang digeser, karena Connect IQ tidak punya blur.

@@ -1,6 +1,8 @@
 <strings>
-    <string id="AppName">Venu Sq HUD</string>
-    <string id="LabelSteps">STEPS</string>
+    <string id="AppName">Crimson HUD</string>
     <string id="LabelHr">BPM</string>
+    <string id="LabelSteps">STEPS</string>
     <string id="LabelKcal">KCAL</string>
+    <string id="LabelGoal">STEP GOAL</string>
+    <string id="LabelSec">SEC</string>
 </strings>

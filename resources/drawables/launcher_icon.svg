@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <rect width="40" height="40" fill="#000000"/>
+  <!-- chamfered HUD frame -->
+  <path d="M3 12 V7 L7 3 H14" fill="none" stroke="#E61919" stroke-width="2"/>
+  <path d="M26 3 H33 L37 7 V12" fill="none" stroke="#E61919" stroke-width="2"/>
+  <path d="M3 28 V33 L7 37 H14" fill="none" stroke="#E61919" stroke-width="2"/>
+  <path d="M26 37 H33 L37 33 V28" fill="none" stroke="#E61919" stroke-width="2"/>
+  <!-- segmented power bar, crimson to neon orange -->
+  <rect x="9"  y="24" width="3" height="5"  fill="#E61919"/>
+  <rect x="14" y="21" width="3" height="8"  fill="#F03410"/>
+  <rect x="19" y="18" width="3" height="11" fill="#F84F08"/>
+  <rect x="24" y="15" width="3" height="14" fill="#FF6B00"/>
+  <rect x="29" y="12" width="3" height="17" fill="#FFAA00"/>
+  <rect x="9" y="11" width="15" height="2" fill="#FF6B00"/>
+</svg>

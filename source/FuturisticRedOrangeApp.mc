@@ -2,7 +2,7 @@ import Toybox.Application;
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-class GrmnVnsqApp extends Application.AppBase {
+class FuturisticRedOrangeApp extends Application.AppBase {
 
     function initialize() {
         AppBase.initialize();
@@ -15,6 +15,6 @@ class GrmnVnsqApp extends Application.AppBase {
     }
 
     function getInitialView() {
-        return [ new GrmnVnsqView() ];
+        return [ new FuturisticRedOrangeView() ];
     }
 }

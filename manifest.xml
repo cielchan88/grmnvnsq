@@ -1,11 +1,13 @@
 <?xml version="1.0"?>
 <iq:manifest version="3" xmlns:iq="http://www.garmin.com/xml/connectiq">
-    <iq:application id="a05c2ad1e9624a67b4280c8e696044f5" type="watchface" name="@Strings.AppName" entry="GrmnVnsqApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.2.0">
+    <iq:application id="f8635951d34b4ea388a9d91fecfbf7fa" type="watchface" name="@Strings.AppName" entry="FuturisticRedOrangeApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.3.0">
         <iq:products>
             <iq:product id="venusq2"/>
             <iq:product id="venusq2m"/>
         </iq:products>
-        <iq:permissions/>
+        <iq:permissions>
+            <iq:uses-permission id="SensorHistory"/>
+        </iq:permissions>
         <iq:languages>
             <iq:language>eng</iq:language>
         </iq:languages>
