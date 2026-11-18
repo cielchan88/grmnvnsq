@@ -107,7 +107,7 @@ class FuturisticRedOrangeView extends WatchUi.WatchFace {
         HudRenderer.drawEnvelope(dc, 48, cy, envColor);
         if (notifs > 0) {
             dc.setColor(HudRenderer.COLOR_ORANGE_NEON, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(66, cy, Graphics.FONT_XTINY, notifs > 99 ? "99+" : notifs.toString(),
+            dc.drawText(66, cy, Graphics.FONT_XTINY, notifs > 9 ? "9+" : notifs.toString(),
                 Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
         }
 
@@ -263,8 +263,14 @@ class FuturisticRedOrangeView extends WatchUi.WatchFace {
         dc.drawText(textX, labelY, Graphics.FONT_XTINY, label,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
+        // Drop to a smaller font when the value would spill out of its column
+        var colW = (_w - 2 * MARGIN) / 3;
+        var font = Graphics.FONT_MEDIUM;
+        if (dc.getTextWidthInPixels(value, font) > colW - 10) {
+            font = Graphics.FONT_SMALL;
+        }
         dc.setColor(color, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(cx, 314, Graphics.FONT_MEDIUM, value,
+        dc.drawText(cx, 314, font, value,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
