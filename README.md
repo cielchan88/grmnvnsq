@@ -40,6 +40,22 @@ source/HudRenderer.mc                palet warna + helper gambar (bracket, bar s
    monkeyc -f monkey.jungle -d venusq2 -o bin/CrimsonHud.prg -y developer_key.der
    ```
 
+## Build di GitHub Codespaces / Linux (tanpa .exe)
+Cocok bila laptop tidak boleh menjalankan `.exe`. Buka repo di Codespaces, lalu di terminal:
+```bash
+bash scripts/ciq-setup.sh
+```
+Sekali saja: memasang Java dan `connect-iq-sdk-manager-cli` (open-source, tidak resmi), menampilkan perjanjian lisensi
+Garmin, meminta email + password Garmin (diketik tersembunyi, tidak disimpan oleh skrip), mengunduh SDK serta
+device `venusq2`/`venusq2m`, dan membuat developer key. Akun dengan verifikasi dua langkah (MFA) kemungkinan gagal login.
+
+Setelah itu, setiap kali ingin compile:
+```bash
+bash scripts/build.sh
+```
+Hasilnya `bin/CrimsonHud.prg`. Unduh lewat panel Explorer (klik kanan → Download), lalu salin ke `GARMIN/APPS/` di jam.
+Simulator tidak tersedia di Codespaces (tanpa layar).
+
 ## Menjalankan di simulator
 ```bash
 connectiq &
